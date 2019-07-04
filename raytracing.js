@@ -29,6 +29,7 @@ function saveImageToFile(image, fileName) {
 			let pixel = convertPixel(image[x][y]) + '\t';
 			content += pixel;
 		}
+		content += '\n';
 	}
 
 	fs.writeFileSync(fileName, content);
