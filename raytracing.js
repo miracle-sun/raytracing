@@ -5,9 +5,9 @@ function render(width, height) {
 		image[x] = new Array(height);
 	}
 
-	for (let x = 0; x < width; x++) {
-		for (let y = 0; y < height; y++) {
-			image[x][y] = [x/width, y/height, 0];
+	for (let y = 0; y < height; y++) {
+		for (let x = 0; x < width; x++) {
+			image[x][y] = [y/height, x/width, 0];
 		}
 	}
 
@@ -24,9 +24,9 @@ function saveImageToFile(image, fileName) {
 
 	let content = fileHeader;
 
-	for (let x = 0; x < width; x++) {
-		for (let y = 0; y < height; y++) {
-			let pixel = convertPixel(image[x][y]) + ' ';
+	for (let y = 0; y < height; y++) {
+		for (let x = 0; x < width; x++) {
+			let pixel = convertPixel(image[x][y]) + '\t';
 			content += pixel;
 		}
 	}
