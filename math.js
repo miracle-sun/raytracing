@@ -20,7 +20,7 @@ function difference(a, b) {
 	return res;
 }
 
-function ray_intersect(orig, dir, center, radius) {
+const ray_intersect = function ray_intersect(orig, dir, center, radius) {
 	const L = difference(orig, center);
 	const tca = scalar(L, normalize(dir));
 	const d2 = scalar(L, L) - tca*tca;
@@ -43,7 +43,7 @@ function ray_intersect(orig, dir, center, radius) {
     return true;
 }
 
-function normalize(vec) {
+const normalize = function normalize(vec) {
 	const n = vec.length;
 	let l = 0;
 	let res = [];
@@ -58,6 +58,10 @@ function normalize(vec) {
 
 	return res;
 }
-console.log(ray_intersect([2, 1], [3,4], [3, 3], 1));
-console.log(ray_intersect([2, 1], [1,2], [5, 5], 2));
-console.log(ray_intersect([2, 1], [2,0], [5, 5], 2));
+
+module.exports.normalize = normalize;
+module.exports.ray_intersect = ray_intersect;
+
+// console.log(ray_intersect([2, 1], [3,4], [3, 3], 1));
+// console.log(ray_intersect([2, 1], [-1,-2], [5, 5], 2));
+// console.log(ray_intersect([2, 1], [2,0], [5, 5], 2));
