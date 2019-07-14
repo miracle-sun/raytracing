@@ -20,13 +20,14 @@ function difference(a, b) {
 	return res;
 }
 
-const ray_intersect = function ray_intersect(orig, dir, center, radius) {
+const ray_intersect = function ray_intersect(orig, dir, sphere) {
+	const {center, radius} = sphere;
 	const L = difference(orig, center);
 	const tca = scalar(L, normalize(dir));
 	const d2 = scalar(L, L) - tca*tca;
 
 	if (d2 > radius*radius) {
-		return false; 
+		return -1;
 	}
 
 	const thc = Math.sqrt(radius*radius - d2);
@@ -36,11 +37,11 @@ const ray_intersect = function ray_intersect(orig, dir, center, radius) {
 	if (t0 < 0) {
 		t0 = t1;
         if (t0 < 0) {
-        	return false;
+			return -1;
         }
     }
 
-    return true;
+    return t0;
 }
 
 const normalize = function normalize(vec) {
@@ -61,7 +62,6 @@ const normalize = function normalize(vec) {
 
 module.exports.normalize = normalize;
 module.exports.ray_intersect = ray_intersect;
-
 // console.log(ray_intersect([2, 1], [3,4], [3, 3], 1));
 // console.log(ray_intersect([2, 1], [-1,-2], [5, 5], 2));
 // console.log(ray_intersect([2, 1], [2,0], [5, 5], 2));
