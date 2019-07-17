@@ -1,4 +1,4 @@
-function scalar(a, b) {
+const scalar = function scalar(a, b) {
 	const n = a.length;
 	let res = 0;
 
@@ -9,12 +9,34 @@ function scalar(a, b) {
 	return res;
 }
 
-function difference(a, b) {
+const vectorAdd = function(a, b) {
 	const n = a.length;
 	let res = [];
 
-	for (let i = 0; i < n; i++) {
-		res[i] = b[i] - a[i]
+	for (let i = 0; i < n; i++) {	
+		res.push(a[i] + b[i]);
+	}
+
+	return res;
+}
+
+const vectorSubtract = function(a, b) {
+	const n = a.length;
+	let res = [];
+
+	for (let i = 0; i < n; i++) {	
+		res.push(b[i] - a[i]);
+	}
+
+	return res;
+}
+
+const multipleVectorByConst = function multipleVectorByConst(c, a) {
+	const n = a.length;
+	let res = [];
+
+	for (let i = 0; i < n; i++) {	
+		res.push(a[i]*c);
 	}
 
 	return res;
@@ -22,7 +44,7 @@ function difference(a, b) {
 
 const ray_intersect = function ray_intersect(orig, dir, sphere) {
 	const {center, radius} = sphere;
-	const L = difference(orig, center);
+	const L = vectorSubtract(orig, center);
 	const tca = scalar(L, normalize(dir));
 	const d2 = scalar(L, L) - tca*tca;
 
@@ -62,6 +84,10 @@ const normalize = function normalize(vec) {
 
 module.exports.normalize = normalize;
 module.exports.ray_intersect = ray_intersect;
+module.exports.scalar = scalar;
+module.exports.multipleVectorByConst = multipleVectorByConst;
+module.exports.vectorAdd = vectorAdd;
+module.exports.vectorSubtract = vectorSubtract;
 // console.log(ray_intersect([2, 1], [3,4], [3, 3], 1));
 // console.log(ray_intersect([2, 1], [-1,-2], [5, 5], 2));
 // console.log(ray_intersect([2, 1], [2,0], [5, 5], 2));
