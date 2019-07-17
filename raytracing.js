@@ -83,7 +83,7 @@ function scene_intersect(orig, dir, spheres, lights) {
 			diffuse_light_intensity += lights[j].intensity * Math.max(0, geometry_math.scalar(light_dir, N));
 		}
 
-		return geometry_math.multipleVectorByConst(diffuse_light_intensity, spheres[index].color);
+		return geometry_math.clamp(geometry_math.multipleVectorByConst(diffuse_light_intensity, spheres[index].color));
 	}
 
 	return [0.2, 0.7, 0.8];
@@ -133,8 +133,8 @@ const Sphere3 = {center: [1.5, -0.5, -18], radius: 3, color: RedRubber};
 const Sphere4 = {center: [7, 5, -18], radius: 4, color: Ivory};
 const Spheres = [Sphere1, Sphere2, Sphere3, Sphere4];
 const Lights = [{position: [-20, 20,  20], intensity: 1.5}];
-console.log(saveImageToFile(final_render(Spheres, 1024, 768, Math.PI/2, Lights), 'spheres_with_light.ppm'));
-
+// console.log(saveImageToFile(final_render(Spheres, 1024, 768, Math.PI/2, Lights), 'spheres_with_light.ppm'));
+saveImageToFile(final_render(Spheres, 1024, 768, Math.PI/2, Lights), 'spheres_with_light.ppm');
 // console.log(ray_intersect([2, 1], [3,4], [3, 3], 1));
 // console.log(ray_intersect([2, 1], [-1,-2], [5, 5], 2));
 // console.log(ray_intersect([2, 1], [2,0], [5, 5], 2));
